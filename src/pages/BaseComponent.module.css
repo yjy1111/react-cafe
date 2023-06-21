@@ -1,0 +1,79 @@
+.wrapper{
+    margin: 0 auto;
+    width:80%;
+}
+
+.top{
+    display:flex;
+    padding:20px 0 ;
+    border-bottom: 1px solid rgb(79, 110, 190);
+}
+
+.h1{
+    font-size:26px;
+    color:rgb(79, 110, 190);
+}
+.search{
+    margin-left:780px;
+}
+
+.listsArea{
+    margin: 0 auto;
+    /* padding:20px; */   
+}
+
+.lists:first-child{
+    /* cursor:default; */
+    height:60px;
+    padding-top:20px;
+    color:rgb(143, 143, 143);
+    border-bottom: 1px solid rgb(143, 143, 143);
+}
+
+
+
+.realList{
+    display:flex;
+    justify-content: space-around;
+    /* text-align: center; */
+}
+
+.lists{
+    
+    height:75px;
+    display:grid;
+    grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
+    align-items: center;
+    justify-items:center;
+
+}
+.listEx{
+    padding:0 20px;
+    height:20px;
+    
+    text-align: center;
+    width:90%;
+    display:block;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+   
+}
+
+.listEx:nth-child(5n+3),.listEx:nth-child(5n+4){ 
+/* .lists:nth-child(2)>.listEx:nth-child(5n+3),.lists:nth-child(2)>.listEx:nth-child(5n+4){ */
+    cursor: pointer;
+}
+/* .listEx:nth-child(3), .listEx:nth-child(4){ */
+/* .listEx:nth-child(3){
+    cursor:default;
+} */
+.listTitle{
+    cursor:default;
+}
+.listEx * {
+    margin:0px;
+    font-size:16px;
+    color:black;
+    font-weight: 500;
+}

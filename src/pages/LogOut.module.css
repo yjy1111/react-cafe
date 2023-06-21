@@ -1,0 +1,13 @@
+.logOut{
+    /* margin-top:30px; */
+    font-size:12px;
+    width:80px;
+    background: rgb(102, 136, 222) ; 
+    border:none; 
+    border-radius: 20px;
+    box-shadow:none;  
+    padding:5px; 
+    overflow:visible; 
+    cursor:pointer;
+    color:white;
+}

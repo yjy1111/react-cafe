@@ -1,0 +1,64 @@
+
+.wrapper{
+    height:280px;
+    background-color: rgb(236, 236, 236);
+
+}
+
+.footer{
+    
+    width: 970px;
+    margin:0 auto;
+ 
+}
+a{
+    text-decoration:none;
+    color:black;
+}
+a:hover{
+    /* text-decoration: underline; */
+}
+.zerobase{
+    
+    text-align: center;
+    padding-top:40px;
+    padding-bottom: 30px;
+}
+.footerList{
+    justify-content :center;
+    margin:0;
+    padding:0;
+    padding-bottom: 30px;
+    list-style: none;
+    display:flex;
+}
+.itemList{
+    margin:5px;
+}
+
+.itemList:not(:last-child)::after{
+    content:"|";
+    padding:15px;
+}
+
+.footerSNS{
+    justify-content :center;
+    padding:0;
+    padding-bottom: 30px;
+    margin:0;
+    list-style: none;
+    display:flex;
+}
+
+.itemCard{
+    margin-right:20px;
+
+}
+
+.itemSNS{
+    margin-right:20px;
+}
+.copyRight{
+    text-align: center;
+    padding-bottom: 30px;
+}

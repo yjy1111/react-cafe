@@ -1,0 +1,45 @@
+.content{
+    margin: 0 auto;
+    width:70%;
+    height:100%
+}
+.input{
+    width:400px;
+    height:40px;
+    margin:10px 0;
+    padding-left:10px;
+    font-size:16px;
+}
+.category{
+    width:200px;
+}
+
+.button{
+    margin:10px 0;
+    font-size:20px;
+    padding:5px 15px;
+    background-color: rgb(79, 110, 190);
+    border: 1px solid rgb(79, 110, 190);
+    border-radius: 7px;
+    color:white;
+}
+
+.file{
+    font-size:16px;
+    padding:5px 0;
+    color:black;
+}
+/* .editorContainer .ql-editor::before {
+    font-size: 20px;
+  }
+   */
+
+   .ql-container {
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+    /* font-size: 13px; */
+    font-size: 12px;
+    height: 100%;
+    margin: 0px;
+    position: relative;
+  }

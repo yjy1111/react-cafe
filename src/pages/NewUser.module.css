@@ -1,0 +1,57 @@
+.wrapper{
+    width:700px;
+    margin: 0 auto;
+    margin-top:150px;
+    
+}
+.title{
+    text-align: center;
+    padding-bottom:20px;
+    border-bottom: 1px solid rgb(160, 160, 160);
+}
+
+.input{
+    width: 500px;
+    height: 50px;
+    font-size: 15px;
+    border: 1px solid rgb(151, 151, 151);
+    outline: none;
+    padding-left: 20px;
+    margin-top:30px;    
+}
+
+.submit{
+    margin:30px auto;
+    display:block;
+    font-size:18px;
+    width:300px;
+    background: rgb(79, 110, 190) ; 
+    border:none; 
+    border-radius: 20px;
+    box-shadow:none;  
+    padding:15px; 
+    overflow:visible; 
+    cursor:pointer;
+    color:white;
+}
+.button{
+    
+    font-size:18px;
+    text-align: center;
+    margin:20px auto;
+    padding:15px;
+    width: 300px;
+    border-radius: 20px;
+    color:rgb(79, 110, 190);
+    border:1px solid rgb(79, 110, 190);
+    
+}
+.message{
+    height:25px;
+}
+
+.subtitle{
+    display:inline-block;
+    width:150px;
+    font-size:20px;
+}

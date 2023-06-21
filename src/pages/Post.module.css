@@ -1,0 +1,62 @@
+.wrapper{
+    margin: 0 auto;
+    width:80%;
+}
+.wrapperTwo{
+   padding-left:20px
+}
+.category{
+    /* margin-top:20px; */
+    padding:20px 0;
+    font-size:26px;
+    color:rgb(79,110,190);
+    border-bottom: 1px solid rgb(79, 110, 190);
+}
+
+.title{
+    padding:20px 0;
+    font-size:23px;
+}
+
+.userInfo{
+    display:grid;
+    
+    grid-template-areas: 
+    "pic name"
+    "pic date";
+    grid-template-columns:50px 100px;
+    grid-template-rows: 30px 20px;
+    
+    padding-bottom:20px;
+    border-bottom:1px solid rgb(193, 193, 193);
+    /* gap: 10px;  */
+}
+
+.userPic{
+    grid-area:pic;
+    background-color: rgb(227, 227, 227);
+    border-radius: 50%;
+}
+.userName{
+    padding-left:10px;
+    padding-top:5px;
+    grid-area:name;
+    font-weight: 700;
+}
+.date{
+    color:gray;
+    padding-left:10px;
+    grid-area:date;
+}
+
+.content{
+    padding:10px;
+    padding-bottom:20px;
+    border-bottom:1px solid rgb(193, 193, 193);
+}
+
+.replyArea{
+    padding:20px 0;
+    color:rgb(109, 109, 109);
+    font-size:18px;
+}
