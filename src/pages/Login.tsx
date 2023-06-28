@@ -1,15 +1,14 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import {authService} from '../fbase.tsx'
 import { useState } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link,useNavigate,useLocation } from 'react-router-dom';
 import styles from './Login.module.css'
 function Login(){
-    // const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
-    // console.log(isLoggedIn);
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate=useNavigate();
-
+    const location=useLocation()
     const handleSubmit=async(e:any)=>{
         e.preventDefault();
         console.log('Email:',email)
@@ -20,14 +19,23 @@ function Login(){
             const user=userCredential.user
             
             console.log('Logged in user:',user)
-            
+            console.log('로그인일때 displayName',user.displayName)
             //--글 등록할때 로그인했음에도 불구하고 새로고침하고 글을 등록하면 로그인이 안됐다고 착각해서 그거 해결하려고 쓰는 세션 스토리지
             sessionStorage.setItem('user',JSON.stringify(user))
             
             navigate('/')
         }catch(error){
             console.log(error)
+            alert('로그인이 되지 않았습니다. 다시 시도해주세요')
+            setEmail('')
+            setPassword('')
         }
+    }
+    const { state } = location;
+    if (state && state.email && state.password) {
+    // state에서 이메일과 비밀번호 가져와서 설정
+        setEmail(state.email);
+        setPassword(state.password);
     }
     return(
         <div className={styles.login}>

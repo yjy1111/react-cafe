@@ -13,6 +13,7 @@ import View from './pages/View'
 import GoodCoffee from './pages/GoodCoffee' 
 import WithPet from './pages/WithPet' 
 import Post from './pages/Post'
+import UpdateContent from './pages/UpdateContent'
 function App() {
   
 
@@ -20,29 +21,22 @@ function App() {
     <BrowserRouter>
       <Header/>
       <Routes>
-      <Route path="/" element={<Issue/>}/>
-      <Route path="/users/login" element={<Login/>}/>
-      <Route path="/users/googleLogin" element={<GoogleLogin/>}/>
-      <Route path="/users/new-user" element={<NewUser/>}/>
-      <Route path="/new-content" element={<NewContent/>}/>
+        <Route path="/" element={<Issue/>}/>
+        <Route path="/users/login" element={<Login/>}/>
+        <Route path="/users/googleLogin" element={<GoogleLogin/>}/>
+        <Route path="/users/new-user" element={<NewUser/>}/>
+        <Route path="/new-content" element={<NewContent/>}/>
       
-      <Route path="/dessert" element={<Dessert/>}/>
-      <Route path="/study" element={<Study/>}/>
-      <Route path="/big" element={<Big/>}/>
-      <Route path="/view" element={<View/>}/>
-      <Route path="/goodcoffee" element={<GoodCoffee/>}/>
-      <Route path="/withpet" element={<WithPet/>}/>
+        <Route path="/dessert" element={<Dessert/>}/>
+        <Route path="/study" element={<Study/>}/>
+        <Route path="/big" element={<Big/>}/>
+        <Route path="/view" element={<View/>}/>
+        <Route path="/goodcoffee" element={<GoodCoffee/>}/>
+        <Route path="/withpet" element={<WithPet/>}/>
 
-      <Route path='/:category/:id' element={<Post />} />
-      {/* {menus.map((menu) => (
-        <Route key={menu.name} path={`/${menu.name}`} element={menu.content} />
-      ))} */}
-      {/* <Route path="/fashion" element={<Fashion/>}/>
-      <Route path="/jewelry" element={<Jewelry/>}/>
-     
-      <Route path="/digital" element={<Digital/>}/>
-      <Route path="/cart" element={<Cart/>}/>
-      <Route path="/product/:id" element={<ProductDetail />} /> */}
+        <Route path='/:category/:id' element={<Post />} />
+        <Route path='/:category/:id/updateContent' element={<UpdateContent/>}/>
+  
       </Routes>
       <Footer/>
     </BrowserRouter>

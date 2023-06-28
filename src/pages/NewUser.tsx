@@ -1,13 +1,13 @@
 import {authService} from '../fbase.tsx'
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile } from 'firebase/auth';
 import {useState,useCallback} from 'react'
-import { Link,useNavigate } from 'react-router-dom';
+import { Link,useNavigate,useLocation } from 'react-router-dom';
 import styles from './NewUser.module.css'
 
 function NewUser(){
     const navigate=useNavigate();
-    const [newAccount,setNewAccount]=useState(false)
-    // const [displayName, setDisplayName] = useState('');
+    // const [newAccount,setNewAccount]=useState(false)
+    
     //메일,비밀번호,비밀번호 확인 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -24,6 +24,8 @@ function NewUser(){
     const [isPasswordCheck, setIsPasswordCheck] = useState<boolean>(false)
     // const router = useRouter() 
 
+
+    const location=useLocation()
     const onChangeEmail=useCallback((e:any)=>{
         const emailRegex=/([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
         const emailCurrent=e.target.value
@@ -62,30 +64,32 @@ function NewUser(){
 
     const handleSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('Email:', email);
-        console.log('Password:', password);
-        
         try{
-            let data 
-            if(newAccount){
-                data=await signInWithEmailAndPassword(authService,email,password);      
-            }
-            else{
-                data=await createUserWithEmailAndPassword(authService,email,password)
+                const data=await createUserWithEmailAndPassword(authService,email,password)
                 if (data && data.user) {
-                    const [username] = email.split('@');
+                    // const {uid}=data.user
+                    const [username] = email.split('@'); 
                     await updateProfile(data.user, { displayName:username });
-                //     setDisplayName(data.user.displayName || ''); 
                   }
-            }
-            navigate('/')
-            console.log(data)
+            const userCredential=await signInWithEmailAndPassword(authService,email,password)
+            const loggedInUser=userCredential.user
+            sessionStorage.setItem('user',JSON.stringify(loggedInUser))
+            // console.log('회원가입일때 displayName',loggedInUser.displayName)
+            // console.log('Logged in user:', loggedInUser);
+            alert("회원가입이 무사히 되었습니다!")
+            navigate('/', { state: { isLoggedIn: true, userDisplayName:loggedInUser.displayName } });
         } catch(error){
             console.log(error)
         }
       
       };
-    console.log(authService.currentUser)
+      const { state } = location;
+      if (state && state.email && state.password) {
+    // state에서 이메일과 비밀번호 가져와서 설정
+        setEmail(state.email);
+        setPassword(state.password);
+        }
+    
     return(
         <div className={styles.wrapper}>
         <form onSubmit={handleSubmit}>

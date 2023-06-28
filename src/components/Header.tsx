@@ -1,6 +1,6 @@
 import styles from './Header.module.css'
 
-import { Link} from 'react-router-dom';
+import { Link,useLocation} from 'react-router-dom';
 import Search from './Search.tsx'
 
 import {authService} from '../fbase.tsx'
@@ -17,6 +17,10 @@ export const menus=[
 export default function Header() {
     const [isLogged, setIsLogged] = useState(false);
     const [userDisplayName, setUserDisplayName] = useState('');
+    
+    const location = useLocation();
+    const isLoggedIn = location.state?.isLoggedIn || false;
+    const useryDisplayName = location.state?.useryDisplayName || '';
 
     useEffect(()=>{
         const unsubscribe=authService.onAuthStateChanged((user)=>{
@@ -32,65 +36,52 @@ export default function Header() {
         return () =>{
             unsubscribe();
         }
-    },[])
+    },[isLoggedIn, useryDisplayName])
     return (
         <div className={styles.header}>
-        <Link to='/' className={styles.home}>
-            Home
-        </Link>
-    
-        <div className={styles.menus}>
-            {menus.map((menu)=>{
-                // <Tab 
-                //     item={menu}
-                //     key={`${idx}`}
-                //     selected={name===menu.name}
-                //     onClick={()=>setSelectedTabIdx(idx)}/>
-                return(
-                    <Link to={`/${menu.name}`} key={menu.name} className={styles.menu}>
-                        {menu.title}
-                    </Link>
-                )
-                }
-            )}
+            <div className={styles.leftPosition}>
+                <Link to='/' className={styles.home}>
+                    Home
+                </Link>
             
-        </div>
-        <Search/>
-        
-        <div >
-            
-            { isLogged==true? 
-                <div className={styles.logged}>
-                    <div className={styles.greeting}><span className={styles.user}>{userDisplayName}</span>님, 안녕하세요!</div>
-                    <Link to='/new-content' className={styles.write} style={{ textDecoration: "none" }}>
-                        <div>글쓰기</div>
-                    </Link>
-                    <LogOut/>
-                </div>:
-                <>
-                    <Link to='/users/new-user' className={styles.right}>
-                        회원가입
-                    </Link>
-                    <Link to='/users/login' className={styles.right}>
-                     로그인
-                    </Link>
-                </>
-            }
-            
-        </div>
-            
+                <div className={styles.menus}>
+                    {menus.map((menu)=>{
+                        return(
+                            <Link to={`/${menu.name}`} key={menu.name} className={styles.menu}>
+                                {menu.title}
+                            </Link>
+                        )
+                        }
+                    )}
+                    
+                </div>
+            </div>
+            <div className={styles.rightPosition}>
+                <Search/>
+                
+                <div >
+                    { isLogged==true? 
+                        <div className={styles.logged}>
+                            <div className={styles.greeting}><span className={styles.user}>{userDisplayName}</span>님, 안녕하세요!</div>
+                            <Link to='/new-content' className={styles.write} style={{ textDecoration: "none" }}>
+                                <div>글쓰기</div>
+                            </Link>
+                            <LogOut/>
+                        </div>:
+                        <>
+                            <Link to='/users/new-user' className={styles.right}>
+                                회원가입
+                            </Link>
+                            <Link to='/users/login' className={styles.right}>
+                            로그인
+                            </Link>
+                        </>
+                    }
+                    
+                </div>
+            </div>        
         
 
         </div>
     )
 }
-// function Tab({item,selected,onClick}){
-//     return (
-//         <Link to={`/${item.name}`} key={item.name} onClick={onClick}
-//         className={cx(styles.tab,{[styles.selected]: selected})}>
-      
-//               {item.title}
-            
-//         </Link>
-//     )
-// }

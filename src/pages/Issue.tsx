@@ -1,8 +1,15 @@
 import{useState, useEffect, useRef} from 'react'
+import { Link,useLocation } from 'react-router-dom'
 import styles from './Issue.module.css'
 function Issue() {
     // const images=useRef([{src:'https://via.placeholder.com/150'},{src:'https://via.placeholder.com/150'},{src:'https://via.placeholder.com/150'}])
-    const images = useRef([{src: "http://www.news-paper.co.kr/news/photo/201804/26384_11661_5657.jpg"}, {src: "https://res.heraldm.com/content/image/2015/07/16/20150716000149_0.jpg"}, {src: "https://static.hubzum.zumst.com/hubzum/2021/08/06/00/3557eb83ba4047ac9665b0ca49d560d1.jpg"},{src:"https://www.noblesse.com/shop/data/board/magazine/e7c7075d3503050b"},{src:"https://post-phinf.pstatic.net/MjAyMTA1MjRfNDAg/MDAxNjIxODMzMjUyOTU4.TFyyRB0vSpihm3E2t5Mv9AAWNE8Z_yj8qu9FAxOOmTAg.gGBTdcMEPLS_XRJoT0P1H6csV6-h_2H6vLgmygXwul4g.JPEG/image_3540911991621832305515.jpg?type=w1200"},{src:"https://hng.yna.co.kr/media/content/8468/1645574953927176.jpg"}]);
+    const images = useRef([
+      {src: "http://www.news-paper.co.kr/news/photo/201804/26384_11661_5657.jpg", title:'탐엔탐스', subtitle:'펭-탐! 콜라겐 요거트 망고 스무디를 즐겨보세요',pathname:'/dessert/U8SbS9Ue7057fmzIAp8j'},
+      {src: "https://res.heraldm.com/content/image/2015/07/16/20150716000149_0.jpg", title:'KANNA ON COFFEE', subtitle:'재즈밴드의 연주를 들으면서 책을 읽을 수 있어요!',pathname:'/study/w898nXezdP6UL4CtIFQH'}, 
+      {src: "https://static.hubzum.zumst.com/hubzum/2021/08/06/00/3557eb83ba4047ac9665b0ca49d560d1.jpg",title:'ANARKH', subtitle:'지하3층부터 5층까지 있는 카페를 만나보세요',pathname:'/big/aVkP0PLol7Nh3M1UgBuU'},
+      {src:"https://www.noblesse.com/shop/data/board/magazine/e7c7075d3503050b",title:'WaveOnCoffee', subtitle:'부산의 바다와 커피를 함께!',pathname:'/view/LuaHbNGiq31QidfeIPJw'},
+      {src:"https://post-phinf.pstatic.net/MjAyMTA1MjRfNDAg/MDAxNjIxODMzMjUyOTU4.TFyyRB0vSpihm3E2t5Mv9AAWNE8Z_yj8qu9FAxOOmTAg.gGBTdcMEPLS_XRJoT0P1H6csV6-h_2H6vLgmygXwul4g.JPEG/image_3540911991621832305515.jpg?type=w1200",title:'모모스', subtitle:'2019년 월드바리스타 챔피언십 한국인 최초 우승자의 커피를 맛보세요',pathname:'/goodcoffee'},
+      {src:"https://hng.yna.co.kr/media/content/8468/1645574953927176.jpg",title:'캐어포커피', subtitle:'테라스 애견동반 가능!',pathname:'/withpet/VWQDKIbNWUIXeiuE0J41'}]);
     const [current,setCurrent]=useState(0)
     const [style,setStyle]=useState({transform:`translate(-${current}00%)`})
     const imgSize=useRef(images.current.length)
@@ -30,7 +37,13 @@ function Issue() {
                       key={i}
                       className={styles.img}
                       style={{ backgroundImage: `url(${img.src})` }}
-                    ></div>
+                    >
+                      <div className={styles.title}> {img.title}</div>
+                      <div className={styles.subTitle}> {img.subtitle}</div>
+                      <Link to={img.pathname} className={styles.link}>
+                      <span className={styles.contentBtn}>바로가기 ➜</span>
+                      </Link>
+                    </div>
                 ))}
               </div>
             </div>

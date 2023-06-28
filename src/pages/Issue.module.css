@@ -7,10 +7,18 @@
     user-select: none;
   } */
   
-  div {
+  /* div {
+    transition: all 0.3s ease-out;
+  } */
+.flexbox{
     transition: all 0.3s ease-out;
   }
   
+  .body{
+    width:85%;
+    margin: 0 auto;
+    margin-bottom: 60px;
+  }
   .container {
     display: flex;
     flex-direction: column;
@@ -23,7 +31,7 @@
   }
   
   .window {
-    background: coral;
+    /* background: coral; */
     /* width: 350px;
     height: 250px; */
     width:1400px;
@@ -79,3 +87,40 @@
   .current {
     background: gray;
   }
+
+/* 캐러셀부분 */
+  .title{
+    margin-top:250px;
+    margin-left:30px;
+    font-size:30px;
+    font-weight: 900;
+    color:white;
+}
+
+.subTitle{
+    padding-top:5px;
+    margin-left:30px;
+    margin-bottom:20px;
+    font-size:20px;
+    font-weight: 900;
+    color:white;
+}
+
+.contentBtn{
+    text-decoration: none;
+    padding:7px;
+    margin-left:30px;
+    font-size:20px;
+    font-weight: 900;
+    background: rgb(153, 153, 153) ;
+    color:#FFF;
+    border-radius: 7px;
+    border-color:none 
+}
+.contentBtn:hover{
+    text-decoration:none;
+    background: rgb(125, 125, 125) ;
+}
+.link{
+    text-decoration: none !important;
+}

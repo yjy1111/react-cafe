@@ -5,7 +5,8 @@ const LogOut = () => {
   const navigate = useNavigate();
   const onLogOutClick = () => {
     authService.signOut();
-    // navigate('/');
+    sessionStorage.removeItem('user')
+    navigate('/');
   };
   return (
     <>

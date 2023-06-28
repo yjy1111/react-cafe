@@ -1,9 +1,12 @@
+///dessert/ 글 목록 불러오기 
 import styles from './BaseComponent.module.css'
 import React, { useEffect,useState } from 'react';
 import {collection, query, where, getDocs , orderBy, getFirestore ,QuerySnapshot} from 'firebase/firestore'
 import { dbService }  from "../fbase";
 import { useNavigate } from 'react-router-dom'
 import Pagination from '../components/Pagination'
+// import Search from '../components/Search';
+
 
 function BaseComponent ({category}: { category: string }){
     // const [data,setData]=useState<null | { id: string; title: string; date: string; content: string }[]>(null)
@@ -33,9 +36,9 @@ function BaseComponent ({category}: { category: string }){
             try{
                 // console.log('이거뜨나?')
                 // console.log(category)
-                // const q= query(collection(dbService,'posts'),where("category",'==',category),orderBy('date','desc'))
+                const q= query(collection(dbService,'posts'),where("category",'==',category),orderBy('date','desc'))
             
-                const q= query(collection(dbService,'posts'),where("category",'==',category))
+                // const q= query(collection(dbService,'posts'),where("category",'==',category))
                 const querySnapshot=await getDocs(q)
     
                 const newData=querySnapshot.docs.map((doc)=>({id: doc.id ,  ...doc.data()}))
@@ -64,7 +67,7 @@ function BaseComponent ({category}: { category: string }){
         <div className={styles.wrapper}>
             <div className={styles.top}>
                 <div className={styles.h1}>{category}</div>
-                <input className={styles.search} placeholder='검색 '></input>
+                {/* <Search/> */}
             </div>
            
             <div className={styles.listsArea}>
@@ -75,16 +78,6 @@ function BaseComponent ({category}: { category: string }){
                     <div className={`${styles.listEx} ${styles.listTitle}`}> 작성자 </div>
                     <div className={`${styles.listEx} ${styles.listTitle}`}> 작성일 </div>
                 </div>
-                
-                {/* {data.map((item,idx) => (
-                <div key={idx} className={styles.lists}>
-                    <div className={styles.listEx}> {item.address.split(' ')[0]}</div>
-                    <div className={styles.listEx}>{item.title}</div>
-                    <div  className={styles.listEx} onClick={()=>handleContentClick(item.id)} dangerouslySetInnerHTML={{ __html: truncateText(item.content, 20) }} />
-                    <div className={styles.listEx}>{item.userName}</div>
-                    <div className={styles.listEx}>{new Date(item.date?.seconds * 1000).toLocaleDateString()}</div>
-                </div>    
-                ))}    */}
 
                 {onePaginatedData().map((item,idx) => (
                 <div key={idx} className={styles.lists}>
