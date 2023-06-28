@@ -58,7 +58,7 @@ function Post(){
     // console.log(category)//해당 고유 글 id에 해당 
     const [postData, setPostData] = useState<PostData | null>(null);
     const [currentId,setCurrentId]=useState('')  //현재 로그인한 사람의 정보
-    const [isLogged, setIsLogged] = useState(false);
+   
     
     // const imageListRef=ref(firebaseStorage,'images/')
 
@@ -71,10 +71,10 @@ function Post(){
     useEffect(() => {
     const unsubscribe = authService.onAuthStateChanged((user) => {
         if (user) {
-        setIsLogged(true);
+      
         setCurrentId(user.uid); // 로그인된 사용자의 userId 설정
         } else {
-        setIsLogged(false);
+        
         setCurrentId(''); // 로그인된 사용자가 없는 경우 빈 문자열로 설정
         }
     });
