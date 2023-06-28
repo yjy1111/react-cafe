@@ -1,5 +1,5 @@
 import styles from './Search.module.css'
-import {collection, query, where, getDocs , orderBy, getFirestore ,QuerySnapshot,onSnapshot} from 'firebase/firestore'
+import {collection, query, getDocs } from 'firebase/firestore'
 import { dbService }  from "../fbase";
 import { useNavigate } from 'react-router-dom'
 import {useState,useEffect} from 'react'

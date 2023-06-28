@@ -1,5 +1,5 @@
 import{useState, useEffect, useRef} from 'react'
-import { Link,useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styles from './Issue.module.css'
 function Issue() {
     // const images=useRef([{src:'https://via.placeholder.com/150'},{src:'https://via.placeholder.com/150'},{src:'https://via.placeholder.com/150'}])
@@ -50,7 +50,7 @@ function Issue() {
             <div className={styles.btn} onClick={() => { moveSlide(1); }}><i className="bi bi-chevron-compact-right"></i></div>
           </div>
           <div className={styles.position}>
-            {images.current.map((x, i) => (
+            {images.current.map((_, i) => (
               <div
                 key={i}
                 className={i === current ? `${styles.dot} ${styles.current}` : `${styles.dot}`}

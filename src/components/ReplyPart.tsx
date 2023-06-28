@@ -11,7 +11,10 @@ interface ReplyPartProps {
   interface ReplyData {
     id: string;
     replyContent?: string;
-    replyDate?:string;
+    // replyDate?:string;
+    replyDate?:{
+      seconds:number;
+    };
     replyUserName?:string;
  
   }
@@ -133,7 +136,7 @@ function ReplyPart({ postId, parsedData}:ReplyPartProps){
                                     )
                                 }
                                 <div className={styles.listExBottom}>
-                                <div className={`${styles.listEx} ${styles.replyDate}`}>{new Date(item.replyDate?.seconds * 1000).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</div>
+                                <div className={`${styles.listEx} ${styles.replyDate}`}>{new Date(item.replyDate?.seconds ?? 0 * 1000).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</div>
                                 {parsedData && parsedData.displayName === item.replyUserName && (
                                     <div className={styles.replyDeleteAndUpdate}>
                                         {item.id === selectedReplyId ? (

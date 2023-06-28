@@ -1,4 +1,4 @@
-import { GoogleAuthProvider,signInWithPopup, signInWithRedirect } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithRedirect } from 'firebase/auth';
 import {authService} from '../fbase.tsx'
 import { useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';

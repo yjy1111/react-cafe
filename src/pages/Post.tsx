@@ -1,8 +1,8 @@
 //각각의 글과 댓글보기
 import { useParams } from 'react-router-dom';
 import { useEffect,useState } from 'react';
-import { dbService,firebaseStorage } from '../fbase';
-import {collection,doc,getDoc,deleteDoc,addDoc} from 'firebase/firestore'
+import { dbService} from '../fbase';
+import {collection,doc,getDoc,deleteDoc} from 'firebase/firestore'
 import { authService } from '../fbase';
 import styles from './Post.module.css'
 import { useNavigate } from 'react-router-dom'
@@ -11,21 +11,21 @@ import DynamicMap from '../components/DynamicMap'
 // import { ref} from "firebase/storage";
 
 import ReplyPart from '../components/ReplyPart'
-const CategorySwitch:any={
+const CategorySwitch:Record<string,string>={
     dessert:'디저트',
     study:'공부',
     big:'대형',
     view:'풍경',
     goodcoffee:'커피맛집',
     withpet:'애견동반'
-} as const
+} 
 
 type categoryType= typeof CategorySwitch[keyof typeof CategorySwitch]
 
 interface PostData {
     title: string;
     content: string;
-    date: string;
+    date: { seconds: number };
     userId:string;
     userName:string;
     address:string;
@@ -49,7 +49,11 @@ async function fetchPostData(id:string): Promise<PostData | null>{
     
 }
 function Post(){
-    const { id , category } = useParams(); 
+    // const { id , category } = useParams(); 
+    // const categoryValue=CategorySwitch[category as keyof typeof CategorySwitch]
+    const { id, category } = useParams<{ id?: string; category?: categoryType }>(); 
+    const categoryValue = category ? CategorySwitch[category] : '';
+    // const { id , category } = useParams<{ id: string; category: categoryType }>(); 
     const navigate=useNavigate()
     // console.log(category)//해당 고유 글 id에 해당 
     const [postData, setPostData] = useState<PostData | null>(null);
@@ -82,10 +86,13 @@ function Post(){
 
     useEffect(()=>{
         const fetchData=async()=>{
-            const data=await fetchPostData(id)
-            if (data){
-                setPostData(data)    
-            }       
+            if(id){
+                const data=await fetchPostData(id)
+                if (data){
+                    setPostData(data)    
+                } 
+            }
+                  
             }
             fetchData()
         } 
@@ -94,7 +101,7 @@ function Post(){
         return <div>Loading</div>
     }
     const { title, content, date, userName, userId, address,imageUrl,latitude,longitude } = postData;
-    const categoryValue=CategorySwitch[category as keyof typeof CategorySwitch]
+    
 
     const onDelete=async()=>{
         const ok=window.confirm('글을 삭제하시겠습니까?')
@@ -131,7 +138,8 @@ function Post(){
                 <div className={styles.userInfo}>
                     <div className={styles.userPic}></div>
                     <div className={styles.userName}>{userName}</div>
-                    <div className={styles.date}>{new Date(date?.seconds * 1000).toLocaleDateString()}</div>
+                    {/* <div className={styles.date}>{new Date(date?.seconds * 1000).toLocaleDateString()}</div> */}
+                    <div className={styles.date}>{date?.seconds ? new Date(date?.seconds * 1000).toLocaleDateString() : ''}</div>
                 </div>    
                 <div className={styles.contentArea}>         
                     <div className={styles.content} dangerouslySetInnerHTML={{ __html:content}} />

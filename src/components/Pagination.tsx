@@ -7,7 +7,7 @@ interface PaginationProps{
     paginate:(pageNumber:number)=>void
 }
 
-const Pagination:React.Fc<PaginationProps> =({itemsPerPage,totalItems,currentPage,paginate})=>{
+const Pagination:React.FC<PaginationProps> =({itemsPerPage,totalItems,currentPage,paginate})=>{
     //itemsPerPage: 한 페이지에 있는 데이터 수
     //totalItems: 총 데이터 개수
     const totalPages=Math.ceil(totalItems/itemsPerPage) //총 페이지 갯수

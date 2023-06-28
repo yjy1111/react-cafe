@@ -3,8 +3,8 @@ import { useEffect, useState, FormEvent } from "react";
 import styles from './NewContent.module.css'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { authService,dbService , app,firebaseStorage } from "../fbase";
-import { getFirestore,updateDoc,doc,collection,addDoc,  } from 'firebase/firestore';
+import { firebaseStorage } from "../fbase";
+import { getFirestore,updateDoc,doc,collection} from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 import { getDownloadURL,ref,uploadBytes } from "firebase/storage";
 
@@ -17,7 +17,7 @@ function UpdateContent(){
     const navigate=useNavigate()
     const [imageUpload, setImageUpload] = useState<any>(""); // image file
     const [imageList,setImageList]=useState<string[]>([]) //이거는 아마 여러개 이미지 넣으려고 하는듯
-    const [image, setImage] = useState("");
+    // const [image, setImage] = useState("");
 
     useEffect(() => { ////reactQuill 기본 글 설정
         if (postData) {
@@ -47,7 +47,7 @@ function UpdateContent(){
         const uploadPic = async () =>{  //storage에 이미지를 넣어서 나중에 뺄 수 있게 해줌
        
         if(imageUpload==null) {
-            setImage("")
+            // setImage("")
             return }
         console.log(imageUpload)
         for (let i=0;i<imageUpload.length;i++){

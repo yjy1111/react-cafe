@@ -2,8 +2,8 @@ import { useEffect, useState,  FormEvent } from "react";
 import styles from './NewContent.module.css'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { authService,dbService , app,firebaseStorage } from "../fbase";
-import {collection,addDoc, getDocs, getFirestore, orderBy, query} from 'firebase/firestore'
+import { authService,dbService ,firebaseStorage } from "../fbase";
+import {collection,addDoc} from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import { getDownloadURL,ref,uploadBytes } from "firebase/storage";
 //app : firebaseApp
@@ -29,9 +29,9 @@ function NewContent(){
     //이미지 추가 관련 코드
     const [imageUpload, setImageUpload] = useState<any>(""); // image file
     const [imageList,setImageList]=useState<string[]>([]) //이거는 아마 여러개 이미지 넣으려고 하는듯
-    const [image, setImage] = useState(""); // uploaded image url
+    // const [image, setImage] = useState(""); // uploaded image url
    
-    const [images, setImages] = useState([]);// fetch images url data
+    // const [images, setImages] = useState([]);// fetch images url data
 
 
     const addFile = (event:any) => {  //파일을 넣으때 발생
@@ -55,7 +55,7 @@ function NewContent(){
         const uploadPic = async () =>{  //storage에 이미지를 넣어서 나중에 뺄 수 있게 해줌
        
         if(imageUpload==null) {
-            setImage("")
+            // setImage("")
             return }
         // console.log(imageUpload)
         for (let i=0;i<imageUpload.length;i++){

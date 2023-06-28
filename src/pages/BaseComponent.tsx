@@ -1,16 +1,33 @@
 ///dessert/ 글 목록 불러오기 
 import styles from './BaseComponent.module.css'
-import React, { useEffect,useState } from 'react';
-import {collection, query, where, getDocs , orderBy, getFirestore ,QuerySnapshot} from 'firebase/firestore'
+import { useEffect,useState } from 'react';
+import {collection, query, where, getDocs , orderBy} from 'firebase/firestore'
 import { dbService }  from "../fbase";
 import { useNavigate } from 'react-router-dom'
 import Pagination from '../components/Pagination'
 // import Search from '../components/Search';
-
+interface BaseData {
+    id: string;
+    title?: string | undefined;
+    address?: string | undefined;
+    userName?: string | undefined;
+    content?: string | undefined;
+    date?: { seconds: number } | undefined;
+  }
+  
+const CategorySwitch:Record<string,string>={
+    dessert:'디저트',
+    study:'공부',
+    big:'대형',
+    view:'풍경',
+    goodcoffee:'커피맛집',
+    withpet:'애견동반'
+} 
 
 function BaseComponent ({category}: { category: string }){
+    const categoryValue=CategorySwitch[category as keyof typeof CategorySwitch]
     // const [data,setData]=useState<null | { id: string; title: string; date: string; content: string }[]>(null)
-    const [data,setData]=useState<null | { id: string ; title?: string;}[]>(null)
+    const [data,setData]=useState<BaseData[]|null>(null)
     const navigate=useNavigate()
 
     const [currentPage,setCurrentPage]=useState(1) //페이지ㅇ네이션
@@ -37,11 +54,12 @@ function BaseComponent ({category}: { category: string }){
                 // console.log('이거뜨나?')
                 // console.log(category)
                 const q= query(collection(dbService,'posts'),where("category",'==',category),orderBy('date','desc'))
-            
-                // const q= query(collection(dbService,'posts'),where("category",'==',category))
                 const querySnapshot=await getDocs(q)
     
-                const newData=querySnapshot.docs.map((doc)=>({id: doc.id ,  ...doc.data()}))
+                const newData=querySnapshot.docs.map((doc)=>({
+                    id: doc.id,
+                     ...doc.data()
+                    }))
                 // console.log(newData)
                 setData(newData)
             } catch(error){
@@ -66,7 +84,7 @@ function BaseComponent ({category}: { category: string }){
     return(
         <div className={styles.wrapper}>
             <div className={styles.top}>
-                <div className={styles.h1}>{category}</div>
+                <div className={styles.h1}>{categoryValue}</div>
                 {/* <Search/> */}
             </div>
            
@@ -81,11 +99,11 @@ function BaseComponent ({category}: { category: string }){
 
                 {onePaginatedData().map((item,idx) => (
                 <div key={idx} className={styles.lists}>
-                    <div className={styles.listEx}> {item.address.split(' ')[0]}</div>
+                    <div className={styles.listEx}> {item.address?.split(' ')[0]}</div>
                     <div className={styles.listEx}>{item.title}</div>
-                    <div  className={styles.listEx} onClick={()=>handleContentClick(item.id)} dangerouslySetInnerHTML={{ __html: truncateText(item.content, 20) }} />
+                    <div  className={styles.listEx} onClick={()=>handleContentClick(item.id)} dangerouslySetInnerHTML={{ __html: truncateText(item.content||'', 20) }} />
                     <div className={styles.listEx}>{item.userName}</div>
-                    <div className={styles.listEx}>{new Date(item.date?.seconds * 1000).toLocaleDateString()}</div>
+                    <div className={styles.listEx}>{item.date?.seconds ? new Date(item.date.seconds * 1000).toLocaleDateString() : ''}</div>
                 </div>    
                 ))} 
             </div>
