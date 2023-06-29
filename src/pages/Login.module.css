@@ -8,6 +8,13 @@
 .title{
     text-align: center;
 }
+.googletitle{
+    text-align: center;
+    margin-bottom:0px;    
+}
+.subTitle{
+    margin-bottom:20px;
+}
 .IdPass{
     width: inherit;
     height: 102px;
@@ -15,12 +22,13 @@
     border:1px solid rgb(79, 110, 190);
 }
 .input{
-    width: 500px;
+    /* width: 500px; */
     height: 50px;
     font-size: 15px;
     border: 0;
     outline: none;
     padding-left: 20px;
+    width:100%
     
 }
 .inputTop{

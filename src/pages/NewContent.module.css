@@ -31,12 +31,13 @@
 }
 .fileAlert{
    font-size:13px;
-   color:rgb(240, 117, 117)
+   color:rgb(240, 117, 117);
 }
-/* .editorContainer .ql-editor::before {
-    font-size: 20px;
-  }
-   */
+.fileNotice{
+    font-size:13px;
+    color:rgb(79, 110, 190);
+ }
+
 
    .ql-container {
     box-sizing: border-box;

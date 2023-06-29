@@ -14,13 +14,13 @@
     border-radius:6px;
     position: relative; /* 추가: 상대 위치 설정 */
     z-index: 100;
-    right:30px;
+    /* right:30px; */
   }
-  .search {
+.search {
       position: relative;
       /* width: 225px; */
       background-color: #ECECEC;
-      width: 100%;
+      /* width: 100%; */
       border: 1px solid  #ECECEC;
       border-radius: 8px;
       padding: 10px 12px;
@@ -35,21 +35,21 @@
       padding: 10px 12px;
       font-size: 14px;
     } */
-  .searchItem{
+.searchItem{
     
     padding:10px;
     color:black;
     cursor: pointer;
   }
-  .searchItem:hover{
+.searchItem:hover{
     background-color: #e7e6e6;
     border-radius: 6px;
   }
-  .searchItems{
+.searchItems{
     position:absolute;
     top: 100%; 
     left: 0; 
-    width: 100%;
+    width: 97%;
     background-color: white;
     border-radius: 6px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);

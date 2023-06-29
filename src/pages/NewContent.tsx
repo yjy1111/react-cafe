@@ -17,7 +17,7 @@ function NewContent(){
             [{'header':[1,2,3,4,5,6,false]}],
             ['bold','italic','underline'],['strike','blockquote'],
             [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
-            ['link','image'],
+            // ['link','image'],
             [{'align':[]},{'color':[]},{'background':[]}],
             ['clean']    
         ],
@@ -93,6 +93,11 @@ function NewContent(){
         if (imageList.length==0) {
             imageUrl = [];
         }
+        if (!category || !address || !title || !latitude || !longitude) {
+            alert("모두 입력해주세요!");
+            return;
+        }
+
         console.log('여기에 사진들 주소떠야함',imageList)
         if(user){
             await addDoc(collection(dbService,'posts'),{
@@ -118,7 +123,10 @@ function NewContent(){
     const handleFormSubmit=(event: FormEvent<HTMLFormElement>)=>{
         event.preventDefault();
         if(isLoggedIn){
+
+       
             handleSubmit(event)
+
         }else{
             alert("로그인이 필요합니다!")
         }
@@ -133,9 +141,9 @@ function NewContent(){
                 <br/>
                 <input className={styles.input} id='title' type='text' placeholder="카페이름을 입력해주세요"></input>
                 <br/>
-                <input className={styles.input} id='latitude' type='text' placeholder="위도(latitude)를 입력해주세요 글 작성후 카카오맵으로 뜨게됩니다"></input>
+                <input className={styles.input} id='latitude' type='text' placeholder="위도(latitude)를 입력해주세요! 카카오맵으로 보여요"></input>
                 <br/>
-                <input className={styles.input} id='longitude' type='text' placeholder="경도(longitude)를 입력해주세요! 글 작성후 카카오맵으로 뜨게됩니다"></input>
+                <input className={styles.input} id='longitude' type='text' placeholder="경도(longitude)를 입력해주세요! 카카오맵으로 보여요"></input>
                 <div className={styles.editorContainer}>
                     <ReactQuill
                         modules={modules} 
@@ -146,7 +154,7 @@ function NewContent(){
                     
                 </div>
                 <input className={styles.file} type='file' id='fileUpload' onChange={addFile} multiple/>
-                {/* <input className={styles.file} type='file' id='fileUpload' onChange={addFile}/> */}
+                <span className={styles.fileNotice}>사진이 등록되는데 시간이 걸려요..조금만 기다려주세요</span>
                 <br/>
                 <input className={styles.button} type='submit'></input>
             </form>

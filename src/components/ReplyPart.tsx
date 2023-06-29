@@ -1,6 +1,6 @@
 import styles from '../pages/Post.module.css'
 import { dbService } from '../fbase';
-import {getFirestore,collection,doc,getDocs,deleteDoc,updateDoc,addDoc,where,query} from 'firebase/firestore'
+import {getFirestore,collection,doc,getDocs,deleteDoc,updateDoc,addDoc,where,query,orderBy} from 'firebase/firestore'
 import { useEffect,useState } from 'react';
 
 interface ReplyPartProps {
@@ -58,7 +58,7 @@ function ReplyPart({ postId, parsedData}:ReplyPartProps){
       
       const fetchData = async () => {
         try {
-          const q = query(collection(dbService, 'reply'), where('postId', '==', postId));
+          const q = query(collection(dbService, 'reply'), where('postId', '==', postId),orderBy('replyDate','asc'));
           const querySnapshot = await getDocs(q);
           const newData = querySnapshot.docs.map((doc) => {
             return {
@@ -136,7 +136,9 @@ function ReplyPart({ postId, parsedData}:ReplyPartProps){
                                     )
                                 }
                                 <div className={styles.listExBottom}>
-                                <div className={`${styles.listEx} ${styles.replyDate}`}>{new Date(item.replyDate?.seconds ?? 0 * 1000).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</div>
+                                {/* <div className={`${styles.listEx} ${styles.replyDate}`}>{new Date(item.replyDate?.seconds ?? 0 * 1000).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'  })}</div> */}
+                                <div className={`${styles.listEx} ${styles.replyDate}`}>{item.replyDate?.seconds ? new Date(item.replyDate.seconds * 1000).toLocaleDateString() : ''}</div>
+                                
                                 {parsedData && parsedData.displayName === item.replyUserName && (
                                     <div className={styles.replyDeleteAndUpdate}>
                                         {item.id === selectedReplyId ? (

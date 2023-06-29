@@ -10,6 +10,7 @@ export default function Search() {
     const [searchDataList,setSearchDataList]=useState<any[]>([]);  //카페이름을 이제 다 모아둔 리스트 
     const [filteredData,setFilteredData]=useState(searchDataList);
 
+    
     console.log(searchValue) //뭘 검색창에 입력하는지 
     useEffect(()=>{
         const fetchData=async()=>{
@@ -19,6 +20,7 @@ export default function Search() {
                 const newData = querySnapshot.docs.map((doc) => {
                     const data = doc.data();
                     return {
+                        category:data.category,
                         title: data.title,
                         id: doc.id
                     }});
@@ -47,9 +49,9 @@ export default function Search() {
         }
     },[searchDataList,searchValue])
 
-    const goToPost=(id:string)=>{
+    const goToPost=(id:string,category:string)=>{
         console.log('이동하기')
-        const path = `/product/${id}`;
+        const path = `/${category}/${id}`;
         navigate(path);
     }
 
@@ -67,7 +69,7 @@ export default function Search() {
             return <div
                     key={data.id}
                     className={styles.searchItem}
-                    onClick={()=>goToPost(data.id)}>
+                    onClick={()=>goToPost(data.id,data.category)}>
                         {data.title}
                     </div>
                 
