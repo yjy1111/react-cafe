@@ -58,13 +58,7 @@
   |<img width="100%" alt="기본 로그인" src="https://github.com/yjy1111/react-cafe/assets/109332470/082e2a42-2b3a-45ac-b5cc-65d7aaa99105">|<img width="100%" alt="구글로그인" src="https://github.com/yjy1111/react-cafe/assets/109332470/9ebe2534-9416-42a9-91dc-a5b49c00d183"> |
   
  
-  
-  <p align="center"><img width="50%" alt="세션스토리지" src="https://github.com/yjy1111/react-cafe/assets/109332470/6dcb0c94-d3ff-485a-b292-ce020004b3ac"></p>
 
-
-- Session  Storage
-    
-    로그인 상태를 계속 유지하기 위해서 로그인한 `user`의 정보를 받아와  `SessionStorage`에 보관하였습니다.
 
 
 ### 3. 글 등록
