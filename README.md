@@ -26,7 +26,7 @@
 
 > <div> <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=Firebase&logoColor=white"/> </div>
 
-## 프로젝트 소개
+## 프로젝트 주요 기능
 ### 1. 메인 화면 
 
   |<b> 로그인 전 헤더 </b>|<b> 로그인 후 헤더 </b>|
